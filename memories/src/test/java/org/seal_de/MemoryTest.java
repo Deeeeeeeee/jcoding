@@ -6,7 +6,7 @@ public class MemoryTest {
      * 使用指针压缩，在一定情况下64位HotSpot jvm默认指针压缩
      *
      *Output:
-     *amd64
+     *amd64    +UseCompressedOops
      *Object:                              16
      *
      *include one int:                     16
@@ -17,7 +17,7 @@ public class MemoryTest {
      *include one object:                  24
      */
     static void test1() {
-        System.out.println(System.getProperty("os.arch"));
+        System.out.println(System.getProperty("os.arch") + "    +UseCompressedOops");
         System.out.printf("%-30s%9d\n", "Object:", SizeOfObject.sizeOf(new Object()));
         System.out.println();
         System.out.printf("%-30s%9d\n", "include one int:", SizeOfObject.sizeOf(new IntegerTestOne()));
@@ -33,7 +33,7 @@ public class MemoryTest {
      * 不使用指针压缩
      *
      *Output:
-     *amd64
+     *amd64    -UseCompressedOops
      *Object:                              16
      *
      *include one int:                     24
@@ -44,7 +44,7 @@ public class MemoryTest {
      *include one object:                  32
      */
     static void test2() {
-        System.out.println(System.getProperty("os.arch"));
+        System.out.println(System.getProperty("os.arch") + "    -UseCompressedOops");
         System.out.printf("%-30s%9d\n", "Object:", SizeOfObject.sizeOf(new Object()));
         System.out.println();
         System.out.printf("%-30s%9d\n", "include one int:", SizeOfObject.sizeOf(new IntegerTestOne()));
@@ -56,7 +56,8 @@ public class MemoryTest {
     }
 
     public static void main(String[] args) {
-        test2();
+        test1();
+//        test2();
     }
 
     static class IntegerTestOne {
